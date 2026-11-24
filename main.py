@@ -21,7 +21,6 @@ OUTPUT_NAME = "entry.png"
 def main() -> None:
     output_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
     output_dir.mkdir(parents=True, exist_ok=True)
-    os.chmod(output_dir, 0o755)
 
     png_bytes = base64.b64decode(B64_PATH.read_text(encoding="ascii"), validate=True)
     if not png_bytes.startswith(b"\x89PNG\r\n\x1a\n"):
@@ -29,7 +28,6 @@ def main() -> None:
 
     output_path = output_dir / OUTPUT_NAME
     output_path.write_bytes(png_bytes)
-    os.chmod(output_path, 0o644)
 
 
 if __name__ == "__main__":
